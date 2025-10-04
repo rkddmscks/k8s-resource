@@ -16,11 +16,11 @@ argo-cd:
   global:
     image:
       tag: v3.0.19
-    tolerations:
-      - key: "workload"
-        operator: "Equal"
-        value: "platform"
-        effect: "NoSchedule"
+#    tolerations:
+#      - key: "workload"
+#        operator: "Equal"
+#        value: "platform"
+#        effect: "NoSchedule"
     podLabels:
       app.kubernetes.io/instance: argocd
     securityContext:
