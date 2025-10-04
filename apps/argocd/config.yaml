@@ -1,2 +1,2 @@
 namespace: argocd
-syncWave: "2"
+syncWave: "0"
