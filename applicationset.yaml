@@ -15,12 +15,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: deploy
+  name: k8s-resource
   namespace: argocd
 spec:
   generators:
     - git:
-        repoURL: https://github.com/rkddmscks/deploy.git
+        repoURL: https://github.com/rkddmscks/k8s-resource.git
         revision: main
         directories:
           - path: 'apps/*'
@@ -28,11 +28,11 @@ spec:
     metadata:
       name: '{{path.basename}}'
       annotations:
-        argocd.argoproj.io/sync-wave: "2"
+        argocd.argoproj.io/sync-wave: "1"
     spec:
-      project: deploy
+      project: platform
       source:
-        repoURL: https://github.com/rkddmscks/deploy.git
+        repoURL: https://github.com/rkddmscks/k8s-resource.git
         targetRevision: main
         path: '{{path}}'
         helm:
@@ -40,12 +40,13 @@ spec:
             - values.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: argocd
+        namespace: '{{path.basename}}'
       syncPolicy:
         automated:
           prune: true
           selfHeal: true
+          allowEmpty: false
         syncOptions:
           - CreateNamespace=true
+          - ServerSideApply=true
           - PruneLast=true
-          - ApplyOutOfSyncOnly=true
