@@ -31,3 +31,8 @@ cilium:
   k8sServicePort: ""
   rollOutCiliumPods: false
   priorityClassName: system-node-critical
+  hostFirewall:
+    enabled: false
+  bpf:
+    masquerade: true
+  policyEnforcementMode: "default"

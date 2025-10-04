@@ -21,6 +21,10 @@ argo-cd:
         operator: "Equal"
         value: "platform"
         effect: "NoSchedule"
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 999
+      fsGroup: 999
   configs:
     cm:
       application.instanceLabelKey: argocd.argoproj.io/instance
