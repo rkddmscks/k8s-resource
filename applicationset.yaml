@@ -26,7 +26,7 @@ spec:
           - path: 'apps/*/config.yaml'
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path[1]}}'
       annotations:
         argocd.argoproj.io/sync-wave: '{{syncWave}}'
     spec:
@@ -34,7 +34,7 @@ spec:
       source:
         repoURL: https://github.com/rkddmscks/k8s-resource.git
         targetRevision: main
-        path: '{{path.path}}'
+        path: 'apps/{{path[1]}}'
         helm:
           valueFiles:
             - values.yaml
