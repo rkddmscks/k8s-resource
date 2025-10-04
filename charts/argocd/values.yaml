@@ -16,8 +16,6 @@ argo-cd:
   global:
     image:
       tag: v3.0.19
-    nodeSelector:
-      node-role.kubernetes.io/argocd: "true"
     tolerations:
       - key: "workload"
         operator: "Equal"
