@@ -50,3 +50,5 @@ argo-cd:
     replicas: 1
   redis:
     enabled: true
+    podLabels:
+      app.kubernetes.io/instance: argocd
