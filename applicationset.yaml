@@ -18,6 +18,11 @@ metadata:
   name: k8s-resource
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions:
+    - "missingkey=error"
+  syncPolicy:
+    preserveResourcesOnDeletion: true
   generators:
     - git:
         repoURL: https://github.com/rkddmscks/k8s-resource.git
@@ -26,25 +31,25 @@ spec:
           - path: 'apps/*/config.yaml'
   template:
     metadata:
-      name: '{{path[1]}}'
+      name: '{{ .path.basename }}'
       annotations:
-        argocd.argoproj.io/sync-wave: '{{syncWave}}'
+        argocd.argoproj.io/sync-wave: '{{ default "10" .syncWave }}'
     spec:
       project: platform
       source:
         repoURL: https://github.com/rkddmscks/k8s-resource.git
         targetRevision: main
-        path: 'apps/{{path[1]}}'
+        path: 'apps/{{ .path.basename }}'
         helm:
           valueFiles:
             - values.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{namespace}}'
+        namespace: '{{ default "default" .namespace }}'
       syncPolicy:
         automated:
-          prune: true
-          selfHeal: true
+          prune: false
+          selfHeal: false
           allowEmpty: false
         syncOptions:
           - CreateNamespace=true
