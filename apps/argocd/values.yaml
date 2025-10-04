@@ -16,17 +16,14 @@ argo-cd:
   global:
     image:
       tag: v3.0.19
-#    tolerations:
-#      - key: "workload"
-#        operator: "Equal"
-#        value: "platform"
-#        effect: "NoSchedule"
     podLabels:
       app.kubernetes.io/instance: argocd
-    securityContext:
-      runAsNonRoot: true
-      runAsUser: 999
-      fsGroup: 999
+    securityContext: {}
+    # tolerations:
+    #   - key: "workload"
+    #     operator: "Equal"
+    #     value: "platform"
+    #     effect: "NoSchedule"
   configs:
     cm:
       application.instanceLabelKey: argocd.argoproj.io/instance
@@ -37,7 +34,7 @@ argo-cd:
       policy.default: role:readonly
   server:
     service:
-      type: LoadBalancer
+      type: ClusterIP
     extraArgs:
       - --insecure
     ingress:
@@ -52,3 +49,4 @@ argo-cd:
     enabled: true
     podLabels:
       app.kubernetes.io/instance: argocd
+    securityContext: {}
