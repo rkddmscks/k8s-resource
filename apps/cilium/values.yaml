@@ -13,6 +13,13 @@
 # limitations under the License.
 
 cilium:
+  cluster:
+    name: rkddmscks-v1-cluster
+  gatewayAPI:
+    enabled: true
+  kubeProxyReplacement: true
+  routingMode: tunnel
+  tunnelProtocol: vxlan
   operator:
     replicas: 1
   envoy:
@@ -31,8 +38,3 @@ cilium:
   k8sServicePort: ""
   rollOutCiliumPods: false
   priorityClassName: system-node-critical
-  hostFirewall:
-    enabled: false
-  bpf:
-    masquerade: true
-  policyEnforcementMode: "default"
