@@ -48,5 +48,5 @@ spec:
           allowEmpty: false
         syncOptions:
           - CreateNamespace=true
-          - ServerSideApply=true
           - PruneLast=true
+          - RespectIgnoreDifferences=true
