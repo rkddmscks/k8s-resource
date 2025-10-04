@@ -22,25 +22,25 @@ spec:
     - git:
         repoURL: https://github.com/rkddmscks/k8s-resource.git
         revision: main
-        directories:
-          - path: 'apps/*'
+        files:
+          - path: 'apps/*/config.yaml'
   template:
     metadata:
       name: '{{path.basename}}'
       annotations:
-        argocd.argoproj.io/sync-wave: "1"
+        argocd.argoproj.io/sync-wave: '{{syncWave}}'
     spec:
       project: platform
       source:
         repoURL: https://github.com/rkddmscks/k8s-resource.git
         targetRevision: main
-        path: '{{path}}'
+        path: '{{path.path}}'
         helm:
           valueFiles:
             - values.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{path.basename}}'
+        namespace: '{{namespace}}'
       syncPolicy:
         automated:
           prune: true
