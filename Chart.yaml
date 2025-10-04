@@ -18,3 +18,6 @@ description: Platform infrastructure resources
 type: application
 version: 1.0.0
 appVersion: "1.0"
+dependencies:
+  - name: argocd
+    version: 1.0.0
