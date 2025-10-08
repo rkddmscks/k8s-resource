@@ -20,11 +20,22 @@ controller:
 
 repoServer:
   enabled: true
+  replicas: 1
   autoscaling:
     enabled: false
   service:
     type: ClusterIP
     port: 8081
+
+extraArgs:
+  - --insecure
+
+ignoreDifferences: |
+  - group: apps
+    kind: Deployment
+    name: argocd-repo-server
+    jsonPointers:
+      - /spec/replicas
 
 server:
   enabled: true
