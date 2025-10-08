@@ -11,3 +11,63 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+controller:
+  enabled: true
+  metrics:
+    enabled: true
+  replicas: 1
+
+repoServer:
+  enabled: true
+  autoscaling:
+    enabled: false
+  service:
+    type: ClusterIP
+    port: 8081
+
+server:
+  enabled: true
+  service:
+    type: ClusterIP
+    port: 443
+  ingress:
+    enabled: false
+  insecure: true
+  config:
+    repositories: |
+      - url: https://github.com/rkddmscks/app-of-apps.git
+    application.instanceLabelKey: argocd.argoproj.io/instance
+  rbacConfig:
+    policy.default: role:readonly
+  extraArgs:
+    - --insecure
+    - --staticassets
+  metrics:
+    enabled: true
+
+redis:
+  enabled: true
+  service:
+    type: ClusterIP
+  metrics:
+    enabled: false
+
+applicationSet:
+  enabled: true
+
+notifications:
+  enabled: false
+
+dex:
+  enabled: false
+
+configs:
+  secret:
+    createSecret: true
+  cm:
+    application.resourceTrackingMethod: annotation
+    exec.enabled: true
+    timeout.reconciliation: 180s
+  rbac:
+    policy.default: role:admin
