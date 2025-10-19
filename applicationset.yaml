@@ -18,11 +18,6 @@ metadata:
   name: k8s-resource
   namespace: argocd
 spec:
-  goTemplate: true
-  goTemplateOptions:
-    - "missingkey=error"
-  syncPolicy:
-    preserveResourcesOnDeletion: true
   generators:
     - git:
         repoURL: https://github.com/rkddmscks/k8s-resource.git
