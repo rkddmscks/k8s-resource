@@ -4,7 +4,7 @@ metadata:
   name: app-of-apps
   namespace: argocd
 spec:
-  project: platform
+  project: default
   source:
     repoURL: https://github.com/rkddmscks/app-of-apps.git
     targetRevision: main
