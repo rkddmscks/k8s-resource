@@ -31,7 +31,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/injunweb/k8s-resource.git
+        repoURL: https://github.com/rkddmscks/k8s-resource.git
         targetRevision: HEAD
         path: "{{path}}"
       destination:
