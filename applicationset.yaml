@@ -26,7 +26,7 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/rkddmscks/k8s-resource.git
-        revision: main
+        revision: HEAD
         files:
           - path: 'apps/*/config.yaml'
   template:
@@ -45,7 +45,7 @@ spec:
             - values.yaml
       destination:
         server: https://kubernetes.default.svc
-        namespace: '{{ default "default" .namespace }}'
+        namespace: '{{ path.basename }}'
       syncPolicy:
         automated:
           prune: false
