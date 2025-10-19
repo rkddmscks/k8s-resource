@@ -45,3 +45,4 @@ spec:
           - CreateNamespace=true
           - PruneLast=true
           - RespectIgnoreDifferences=true
+          - ServerSideApply=true
